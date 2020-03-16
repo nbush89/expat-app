@@ -1,1 +1,6 @@
-<p>home works!</p>
+<div *ngFor="let city of popularCities; index as i">
+  <div *ngIf="i<10">
+    <p>{{ city.country }}</p>
+    <p>{{ city.city_name }}</p>
+  </div>
+</div>
