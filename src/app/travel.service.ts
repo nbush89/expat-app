@@ -16,4 +16,20 @@ export class TravelService {
       }
     );
   }
+  getCities() {
+    return this.http.get("https://www.numbeo.com/api/cities", {
+      params: { api_key: this.apiKey }
+    });
+  }
+  // getWeather(){
+
+  // }
+  getCostOfLiving() {
+    return this.http.get(
+      "https://www.numbeo.com/api/rankings_by_city_current?section=1",
+      {
+        params: { api_key: this.apiKey }
+      }
+    );
+  }
 }

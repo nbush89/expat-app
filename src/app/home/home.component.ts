@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   popularCities: any = [];
+  showWeatherIndex: number;
   constructor(
     private service: TravelService,
     private router: Router,
@@ -17,7 +18,22 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getPopularCities().subscribe(response => {
-     this.popularCities = response;
+      this.popularCities = response;
+  
+    });
+    this.getCities();
+  }
+  getCostOfLiving() {
+    this.service.getCostOfLiving().subscribe(response => {
+      console.log(response);
+    });
+  }
+  showWeatherFilter(index: number) {
+    this.showWeatherIndex = index;
+  }
+  getCities() {
+    this.service.getCities().subscribe(response => {
+      console.log(response);
     });
   }
 }
