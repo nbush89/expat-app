@@ -9,6 +9,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { HomeComponent } from "./home/home.component";
 import { CityInfoComponent } from "./city-info/city-info.component";
 import { FavoriteCitiesComponent } from "./favorite-cities/favorite-cities.component";
+import { GoogleMapsModule } from "@angular/google-maps";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,12 @@ import { FavoriteCitiesComponent } from "./favorite-cities/favorite-cities.compo
     CityInfoComponent,
     FavoriteCitiesComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    GoogleMapsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

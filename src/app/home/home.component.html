@@ -1,6 +1,27 @@
 <app-header></app-header>
+<div class="filter">
+  <h2>Filter by</h2>
+  <div class="weather">
+    <img src="#" alt="weather">
+  </div>
+  <div class="population">
+    <img src="#" alt="population">
+  </div>
+  <div class="cost">
+    <img src="#" alt="cost of living">
+  </div>
+</div>
+
+<!-- <div>
+<form>
+<label for="hot">Hot</label>
+<input type="checkbox">x</input>
+</form>
+</div> -->
+
+<google-map></google-map>
 <div *ngFor="let city of popularCities; index as i">
-  <div *ngIf="i<10">
+  <div *ngIf="i < 10">
     <p>{{ city.country }}</p>
     <p>{{ city.city_name }}</p>
   </div>
