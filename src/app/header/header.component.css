@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  width: 100vw;
+  background-color: #B56DE8;
+}
+
+img {
+  height: 100px;
+  width: 150px;
+}
+
+ul {
+  display: flex;
+
+}
+
+li {
+  list-style: none;
+  margin-right: 20px;
+  font-size: 22px;
+
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
