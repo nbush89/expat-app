@@ -9,8 +9,11 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   popularCities: any = [];
+  costOfLiving: any = [];
   showWeatherIndex: number;
+  showCostIndex: number;
   markers: any[] = [];
+  data: any;
   constructor(
     private service: TravelService,
     private router: Router,
@@ -20,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.getPopularCities().subscribe(response => {
       this.popularCities = response;
-      console.log(response[0]);
+
       for (let i = 0; i < 10; i++) {
         // let location: any;
         this.service
@@ -30,31 +33,42 @@ export class HomeComponent implements OnInit {
           })
           .subscribe(response => {
             let location: any = response;
-            console.log(response);
+
             let marker: any = {};
-            console.log(location.results[0].geometry.location.lat);
-            console.log(location.results[0].geometry.location.lng);
+
             marker.position = new google.maps.LatLng({
               lat: Number(location.results[0].geometry.location.lat),
               lng: Number(location.results[0].geometry.location.lng)
             });
-            console.log(marker);
+
             this.markers.push(marker);
           });
       }
     });
+    this.getCostOfLiving();
   }
   getCostOfLiving() {
     this.service.getCostOfLiving().subscribe(response => {
+      this.costOfLiving = response;
       console.log(response);
     });
   }
   showWeatherFilter(index: number) {
     this.showWeatherIndex = index;
   }
-  // getLatLon(location: any) {
-  //   this.service.getLatLon(location).subscribe(response => {
-  //     return response;
-  //   });
-  // }
+  showCostFilter(index: number) {
+    this.showCostIndex = index;
+  }
+
+  getWeather(city: string) {
+    this.route.queryParams.subscribe(queryParams => {
+      this.service.getWeather(queryParams.city).subscribe(data => {
+        this.data = data;
+      });
+    });
+  }
+
+  toggleDisplay() {
+    this.showCostIndex = null;
+  }
 }

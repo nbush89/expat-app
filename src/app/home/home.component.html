@@ -2,15 +2,19 @@
 <div class="filter">
   <h2>Filter by</h2>
   <div class="weather">
-    <img src="#" alt="weather">
-
+    <img src="#" alt="weather" />
+    <p>{{ data.city }}</p>
   </div>
   <div class="population">
-    <img src="#" alt="population">
+    <img src="#" alt="population" />
   </div>
-  <div class="cost">
-    <img src="#" alt="cost of living">
-
+  <div (click)="toggleDisplay()">
+    <img src="../../assets/money.jpeg" alt="cost of living" height="50" />
+    <div *ngFor="let cost of costOfLiving; index as i" class="cost">
+      <div *ngIf="i < 10">
+        <p>{{ cost.rent_index | currency }}</p>
+      </div>
+    </div>
   </div>
 </div>
 
