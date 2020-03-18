@@ -11,7 +11,10 @@ export class HomeComponent implements OnInit {
   popularCities: any = [];
   costOfLiving: any = [];
   showWeatherIndex: number;
-  showCostIndex: number;
+  showMoneyFilter: boolean = false;
+  showWeatherFilter: boolean = false;
+  showPopulationFilter: boolean = false;
+  moneyRange: number;
   markers: any[] = [];
   data: any;
   constructor(
@@ -53,11 +56,28 @@ export class HomeComponent implements OnInit {
       console.log(response);
     });
   }
-  showWeatherFilter(index: number) {
-    this.showWeatherIndex = index;
+
+  toggleMoneyFilter() {
+    this.showMoneyFilter = !this.showMoneyFilter;
   }
-  showCostFilter(index: number) {
-    this.showCostIndex = index;
+
+  toggleWeatherFilter() {
+    this.showWeatherFilter = !this.showWeatherFilter;
+  }
+
+  togglePopulationFilter() {
+    this.showPopulationFilter = !this.showPopulationFilter;
+  }
+
+  setMoneyRange(price: number) {
+    this.moneyRange = price;
+    console.log(this.moneyRange);
+    if (this.moneyRange == 25) {
+      let filteredArray = this.costOfLiving.filter(cpi => {
+        return cpi.cpi_index > 0 && cpi.cpi_index <= 25;
+      });
+      console.log(filteredArray);
+    }
   }
 
   getWeather(city: string) {
@@ -68,7 +88,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  toggleDisplay() {
-    this.showCostIndex = null;
-  }
+  // toggleDisplay() {
+  //   this.showCostIndex = null;
+  // }
 }
