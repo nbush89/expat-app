@@ -1,0 +1,32 @@
+.cost-living{
+    display: flex;
+    
+}
+
+.box1 {
+  height: 50px;
+  width: 50px;
+  background-color: lightblue;
+  font-size: small;
+}
+
+.box2 {
+  height: 50px;
+  width: 50px;
+  background-color: lightblue;
+  font-size: small;
+}
+
+.box3 {
+  height: 50px;
+  width: 50px;
+  background-color: lightblue;
+  font-size: small;
+}
+
+.box4 {
+  height: 50px;
+  width: 50px;
+  background-color: lightblue;
+  font-size: small;
+}
