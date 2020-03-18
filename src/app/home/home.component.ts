@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class HomeComponent implements OnInit {
   popularCities: any = [];
   showWeatherIndex: number;
+  markers: any[] = [];
   constructor(
     private service: TravelService,
     private router: Router,
@@ -19,9 +20,29 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.service.getPopularCities().subscribe(response => {
       this.popularCities = response;
-  
+      console.log(response[0]);
+      for (let i = 0; i < 10; i++) {
+        // let location: any;
+        this.service
+          .getLatLon({
+            city: this.popularCities[i].city_name,
+            country: this.popularCities[i].country
+          })
+          .subscribe(response => {
+            let location: any = response;
+            console.log(response);
+            let marker: any = {};
+            console.log(location.results[0].geometry.location.lat);
+            console.log(location.results[0].geometry.location.lng);
+            marker.position = new google.maps.LatLng({
+              lat: Number(location.results[0].geometry.location.lat),
+              lng: Number(location.results[0].geometry.location.lng)
+            });
+            console.log(marker);
+            this.markers.push(marker);
+          });
+      }
     });
-    this.getCities();
   }
   getCostOfLiving() {
     this.service.getCostOfLiving().subscribe(response => {
@@ -31,9 +52,9 @@ export class HomeComponent implements OnInit {
   showWeatherFilter(index: number) {
     this.showWeatherIndex = index;
   }
-  getCities() {
-    this.service.getCities().subscribe(response => {
-      console.log(response);
-    });
-  }
+  // getLatLon(location: any) {
+  //   this.service.getLatLon(location).subscribe(response => {
+  //     return response;
+  //   });
+  // }
 }

@@ -3,7 +3,7 @@
   <h2>Filter by</h2>
   <div class="weather">
     <img src="#" alt="weather">
-    
+
   </div>
   <div class="population">
     <img src="#" alt="population">
@@ -21,7 +21,10 @@
 </form>
 </div> -->
 
-<google-map></google-map>
+<google-map>
+  <map-marker *ngFor="let marker of markers" [position]="marker.position">
+  </map-marker>
+</google-map>
 <div *ngFor="let city of popularCities; index as i">
   <div *ngIf="i < 10">
     <p>{{ city.country }}</p>
