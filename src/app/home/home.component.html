@@ -17,56 +17,23 @@
   </div>
 
   <div *ngIf="showWeatherFilter" class="weather-popup">
-    <p>weather</p>
+    <p (click)="setWeatherRange(45)">Cold</p>
+    <p (click)="setWeatherRange(65)">Mild</p>
+    <p (click)="setWeatherRange(85)">Hot</p>
   </div>
 
   <div *ngIf="showPopulationFilter" class="population-popup">
     <p>population</p>
   </div>
 
-  <div>
-    <img src="../../assets/money.jpeg" alt="cost of living" height="50" />
-    <div class="cost-living">
-      <div class="box1">
-        <p>$</p>
-        <p>From < 150</p>
-      </div>
-      <div class="box2">
-        <p>$$</p>
-        <p>From 150 - 350</p>
-      </div>
-      <div class="box3">
-        <p>$$$</p>
-        <p>From 350 - 500</p>
-      </div>
-      <div class="box4">
-        <p>$$$$</p>
-        <p>From > 500</p>
-      </div>
+  <google-map [zoom]="zoom" width="90vw">
+    <map-marker *ngFor="let marker of markers" [position]="marker.position">
+    </map-marker>
+  </google-map>
+  <div *ngFor="let city of popularCities; index as i">
+    <div *ngIf="i < 10">
+      <p>{{ city.country }}</p>
+      <p>{{ city.city_name }}</p>
     </div>
-
-    <div *ngFor="let cost of costOfLiving; index as i" class="cost">
-      <div *ngIf="i < 10">
-        <p>{{ cost.rent_index }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- <div>
-<form #weatherForm="ngFrom" (ngSubmit)="search(cityForm)">
-<label for="city">Hot</label>
-<input type="checkbox">x</input>
-</form>
-</div> -->
-
-<google-map>
-  <map-marker *ngFor="let marker of markers" [position]="marker.position">
-  </map-marker>
-</google-map>
-<div *ngFor="let city of popularCities; index as i">
-  <div *ngIf="i < 10">
-    <p>{{ city.country }}</p>
-    <p>{{ city.city_name }}</p>
   </div>
 </div>

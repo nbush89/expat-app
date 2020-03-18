@@ -6,7 +6,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class TravelService {
   apiKey: string = "pijdd4yhi5g4cz";
-  API_KEY: string = "0aba1dd596b09e7d0fc50914d50dbac1";
+  API_KEY: string = "21fd5ac3710ae23f3172c9ff88d289bd";
 
   constructor(private http: HttpClient) {}
   getPopularCities() {
@@ -42,9 +42,13 @@ export class TravelService {
     });
   }
 
-  getWeather(city: string="Detroit") {
+  getWeather(location: any) {
     return this.http.get("https://api.openweathermap.org/data/2.5/weather?", {
-      params: { q: city, appid: this.API_KEY, units: "imperial" }
+      params: {
+        q: `${location.city}, ${location.country}`,
+        appid: this.API_KEY,
+        units: "imperial"
+      }
     });
   }
 }
