@@ -85,6 +85,17 @@ export class HomeComponent implements OnInit {
       array = this.costOfLiving;
     } else {
       array = this.combinedFilteredArray;
+      array.forEach(patrick => {
+        let foundCity = this.costOfLiving.find(city => {
+          return city.city_id == patrick.city_id;
+        });
+        console.log(foundCity);
+        if (foundCity === undefined) {
+          patrick.cpi_index = null;
+        } else {
+          patrick.cpi_index = foundCity.cpi_index;
+        }
+      });
     }
     console.log(array);
 
@@ -134,9 +145,19 @@ export class HomeComponent implements OnInit {
       array = this.pollution;
     } else {
       array = this.combinedFilteredArray;
+      array.forEach(patrick => {
+        let foundCity = this.pollution.find(city => {
+          return city.city_id == patrick.city_id;
+        });
+        console.log(foundCity);
+        if (foundCity === undefined) {
+          patrick.pollution_index = null;
+        } else {
+          patrick.pollution_index = foundCity.pollution_index;
+        }
+      });
     }
     console.log(array);
-
     if (this.pollutionRange == 33) {
       let filteredArray = array.filter(object => {
         return object.pollution_index <= 33;
@@ -144,30 +165,16 @@ export class HomeComponent implements OnInit {
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
-    } else if (this.pollutionRange == 50) {
-      let filteredArray = array.filter(cpi => {
-        return cpi.cpi_index > 25 && cpi.cpi_index <= 50;
-      });
-      console.log(filteredArray);
-      this.combinedFilteredArray = filteredArray;
-      this.setMarkers(this.combinedFilteredArray);
-    } else if (this.pollutionRange == 75) {
-      let filteredArray = array.filter(cpi => {
-        return cpi.cpi_index > 50 && cpi.cpi_index <= 75;
-      });
-      console.log(filteredArray);
-      this.combinedFilteredArray = filteredArray;
-      this.setMarkers(this.combinedFilteredArray);
-    } else if (this.pollutionRange == 100) {
-      let filteredArray = array.filter(cpi => {
-        return cpi.cpi_index > 75 && cpi.cpi_index <= 100;
+    } else if (this.pollutionRange == 66) {
+      let filteredArray = array.filter(object => {
+        return object.pollution_index > 33 && object.pollution_index <= 66;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
-      let filteredArray = array.filter(cpi => {
-        return cpi.cpi_index > 100 && cpi.cpi_index <= 130;
+      let filteredArray = array.filter(object => {
+        return object.pollution_index > 66;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;

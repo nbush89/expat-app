@@ -4,7 +4,7 @@
 
   <div>
     <p (click)="toggleMoneyFilter()">Money</p>
-    <!-- <p (click)="toggleWeatherFilter()">Weather</p> -->
+    <p (click)="togglePollutionFilter()">Pollution</p>
     <!-- <p (click)="togglePopulationFilter()">Population</p> -->
   </div>
 
@@ -16,11 +16,11 @@
     <p (click)="setMoneyRange(130)">$$$$$</p>
   </div>
 
-  <!-- <div *ngIf="showPollutionFilter" class="pollution-popup">
+  <div *ngIf="showPollutionFilter" class="pollution-popup">
     <p (click)="setPollutionRange(33)">Safe</p>
     <p (click)="setPollutionRange(66)">Moderate</p>
     <p (click)="setPollutionRange(99)">Unsafe</p>
-  </div> -->
+  </div>
   <!-- 
   <div *ngIf="showPopulationFilter" class="population-popup">
     <p>population</p>
