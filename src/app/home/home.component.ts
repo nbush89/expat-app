@@ -48,21 +48,6 @@ export class HomeComponent implements OnInit {
           });
       }
     });
-    this.getCostOfLiving();
-    this.getPollution();
-  }
-  getCostOfLiving() {
-    this.service.getCostOfLiving().subscribe(response => {
-      this.costOfLiving = response;
-      console.log(this.costOfLiving);
-    });
-  }
-
-  getPollution() {
-    this.service.getPollution().subscribe(response => {
-      this.pollution = response;
-      console.log(this.pollution);
-    });
   }
 
   toggleMoneyFilter() {
@@ -80,22 +65,14 @@ export class HomeComponent implements OnInit {
   setMoneyRange(price: number) {
     this.moneyRange = price;
     console.log(this.moneyRange);
+  }
+
+  addMoneyFilter() {
     let array: any = [];
     if (!this.combinedFilteredArray) {
-      array = this.costOfLiving;
+      array = this.popularCities;
     } else {
       array = this.combinedFilteredArray;
-      array.forEach(patrick => {
-        let foundCity = this.costOfLiving.find(city => {
-          return city.city_id == patrick.city_id;
-        });
-        console.log(foundCity);
-        if (foundCity === undefined) {
-          patrick.cpi_index = null;
-        } else {
-          patrick.cpi_index = foundCity.cpi_index;
-        }
-      });
     }
     console.log(array);
 
@@ -140,22 +117,13 @@ export class HomeComponent implements OnInit {
   setPollutionRange(pollution: number) {
     this.pollutionRange = pollution;
     console.log(this.pollutionRange);
+  }
+  addPollutionFilter() {
     let array: any = [];
     if (!this.combinedFilteredArray) {
-      array = this.pollution;
+      array = this.popularCities;
     } else {
       array = this.combinedFilteredArray;
-      array.forEach(patrick => {
-        let foundCity = this.pollution.find(city => {
-          return city.city_id == patrick.city_id;
-        });
-        console.log(foundCity);
-        if (foundCity === undefined) {
-          patrick.pollution_index = null;
-        } else {
-          patrick.pollution_index = foundCity.pollution_index;
-        }
-      });
     }
     console.log(array);
     if (this.pollutionRange == 33) {

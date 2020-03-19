@@ -14,12 +14,14 @@
     <p (click)="setMoneyRange(75)">$$$</p>
     <p (click)="setMoneyRange(100)">$$$$</p>
     <p (click)="setMoneyRange(130)">$$$$$</p>
+    <button (click)="addMoneyFilter()">Submit</button>
   </div>
 
   <div *ngIf="showPollutionFilter" class="pollution-popup">
     <p (click)="setPollutionRange(33)">Safe</p>
     <p (click)="setPollutionRange(66)">Moderate</p>
     <p (click)="setPollutionRange(99)">Unsafe</p>
+    <button (click)="addPollutionFilter()">Submit</button>
   </div>
   <!-- 
   <div *ngIf="showPopulationFilter" class="population-popup">
