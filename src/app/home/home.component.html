@@ -5,7 +5,7 @@
   <div>
     <p (click)="toggleMoneyFilter()">Money</p>
     <p (click)="togglePollutionFilter()">Pollution</p>
-    <!-- <p (click)="togglePopulationFilter()">Population</p> -->
+    <p (click)="toggleClimateFilter()">Climate</p>
   </div>
 
   <div *ngIf="showMoneyFilter" class="money-popup">
@@ -22,6 +22,14 @@
     <p (click)="setPollutionRange(66)">Moderate</p>
     <p (click)="setPollutionRange(99)">Unsafe</p>
     <button (click)="addPollutionFilter()">Submit</button>
+  </div>
+
+  <div *ngIf="showClimateFilter" class="climate-popup">
+    <p (click)="setClimateRange(25)">Cold</p>
+    <p (click)="setClimateRange(50)">Mild</p>
+    <p (click)="setClimateRange(75)">Moderate</p>
+    <p (click)="setClimateRange(100)">Hot</p>
+    <button (click)="addClimateFilter()">Submit</button>
   </div>
   <!-- 
   <div *ngIf="showPopulationFilter" class="population-popup">

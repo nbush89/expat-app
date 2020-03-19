@@ -15,10 +15,10 @@ export class HomeComponent implements OnInit {
   showWeatherIndex: number;
   showMoneyFilter: boolean = false;
   showPollutionFilter: boolean = false;
-  showPopulationFilter: boolean = false;
+  showClimateFilter: boolean = false;
   moneyRange: number;
   pollutionRange: number;
-  popRange: number;
+  climateRange: number;
   markers: any[] = [];
   data: any;
   zoom: number = 2;
@@ -58,8 +58,8 @@ export class HomeComponent implements OnInit {
     this.showPollutionFilter = !this.showPollutionFilter;
   }
 
-  togglePopulationFilter() {
-    this.showPopulationFilter = !this.showPopulationFilter;
+  toggleClimateFilter() {
+    this.showClimateFilter = !this.showClimateFilter;
   }
 
   setMoneyRange(price: number) {
@@ -80,35 +80,35 @@ export class HomeComponent implements OnInit {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 0 && cpi.cpi_index <= 25;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 50) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 25 && cpi.cpi_index <= 50;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 75) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 50 && cpi.cpi_index <= 75;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 100) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 75 && cpi.cpi_index <= 100;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 100 && cpi.cpi_index <= 130;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     }
@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit {
 
   setPollutionRange(pollution: number) {
     this.pollutionRange = pollution;
-    console.log(this.pollutionRange);
+    // console.log(this.pollutionRange);
   }
   addPollutionFilter() {
     let array: any = [];
@@ -130,19 +130,61 @@ export class HomeComponent implements OnInit {
       let filteredArray = array.filter(object => {
         return object.pollution_index <= 33;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.pollutionRange == 66) {
       let filteredArray = array.filter(object => {
         return object.pollution_index > 33 && object.pollution_index <= 66;
       });
-      console.log(filteredArray);
+      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(object => {
         return object.pollution_index > 66;
+      });
+      // console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    }
+  }
+  setClimateRange(climate: number) {
+    this.climateRange = climate;
+    // console.log(this.pollutionRange);
+  }
+  addClimateFilter() {
+    let array: any = [];
+    if (!this.combinedFilteredArray) {
+      array = this.popularCities;
+    } else {
+      array = this.combinedFilteredArray;
+    }
+    console.log(array);
+    if (this.climateRange == 25) {
+      let filteredArray = array.filter(object => {
+        return object.climate_index <= 25;
+      });
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else if (this.climateRange == 50) {
+      let filteredArray = array.filter(object => {
+        return object.climate_index > 25 && object.climate_index <= 50;
+      });
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else if (this.climateRange == 75) {
+      let filteredArray = array.filter(object => {
+        return object.climate_index > 50 && object.climate_index <= 75;
+      });
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else {
+      let filteredArray = array.filter(object => {
+        return object.climate_index > 75;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
