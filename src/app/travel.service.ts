@@ -42,6 +42,15 @@ export class TravelService {
     });
   }
 
+  getPollution() {
+    return this.http.get(
+      "https://www.numbeo.com/api/rankings_by_city_current?section=8",
+      {
+        params: { api_key: this.apiKey }
+      }
+    );
+  }
+
   getWeather(location: any) {
     return this.http.get("https://api.openweathermap.org/data/2.5/weather?", {
       params: {

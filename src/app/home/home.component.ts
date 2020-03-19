@@ -10,13 +10,14 @@ import { Router, ActivatedRoute } from "@angular/router";
 export class HomeComponent implements OnInit {
   popularCities: any = [];
   costOfLiving: any = [];
+  pollution: any = [];
   combinedFilteredArray: any;
   showWeatherIndex: number;
   showMoneyFilter: boolean = false;
-  showWeatherFilter: boolean = false;
+  showPollutionFilter: boolean = false;
   showPopulationFilter: boolean = false;
   moneyRange: number;
-  weatherRange: number;
+  pollutionRange: number;
   popRange: number;
   markers: any[] = [];
   data: any;
@@ -48,20 +49,19 @@ export class HomeComponent implements OnInit {
       }
     });
     this.getCostOfLiving();
+    this.getPollution();
   }
   getCostOfLiving() {
     this.service.getCostOfLiving().subscribe(response => {
       this.costOfLiving = response;
-      // this.costOfLiving.forEach(object => {
-      //   let location: any = {};
-      //   location.city = object.city_name;
-      //   location.country = object.country;
-      //   this.service.getWeather(location).subscribe(response => {
-      //     let temp: any = response;
-      //     object.temperature = temp.main.temp;
-      //   });
-      // });
       console.log(this.costOfLiving);
+    });
+  }
+
+  getPollution() {
+    this.service.getPollution().subscribe(response => {
+      this.pollution = response;
+      console.log(this.pollution);
     });
   }
 
@@ -69,8 +69,8 @@ export class HomeComponent implements OnInit {
     this.showMoneyFilter = !this.showMoneyFilter;
   }
 
-  toggleWeatherFilter() {
-    this.showWeatherFilter = !this.showWeatherFilter;
+  togglePollutionFilter() {
+    this.showPollutionFilter = !this.showPollutionFilter;
   }
 
   togglePopulationFilter() {
@@ -80,36 +80,44 @@ export class HomeComponent implements OnInit {
   setMoneyRange(price: number) {
     this.moneyRange = price;
     console.log(this.moneyRange);
+    let array: any = [];
+    if (!this.combinedFilteredArray) {
+      array = this.costOfLiving;
+    } else {
+      array = this.combinedFilteredArray;
+    }
+    console.log(array);
+
     if (this.moneyRange == 25) {
-      let filteredArray = this.costOfLiving.filter(cpi => {
+      let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 0 && cpi.cpi_index <= 25;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 50) {
-      let filteredArray = this.costOfLiving.filter(cpi => {
+      let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 25 && cpi.cpi_index <= 50;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 75) {
-      let filteredArray = this.costOfLiving.filter(cpi => {
+      let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 50 && cpi.cpi_index <= 75;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 100) {
-      let filteredArray = this.costOfLiving.filter(cpi => {
+      let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 75 && cpi.cpi_index <= 100;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
-      let filteredArray = this.costOfLiving.filter(cpi => {
+      let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 100 && cpi.cpi_index <= 130;
       });
       console.log(filteredArray);
@@ -117,22 +125,49 @@ export class HomeComponent implements OnInit {
       this.setMarkers(this.combinedFilteredArray);
     }
   }
-  setWeatherRange(temp: number) {
-    this.weatherRange = temp;
-    console.log(this.weatherRange);
-    this.combinedFilteredArray.forEach(object => {
-      let location: any = {};
-      location.city = object.city_name;
-      location.country = object.country;
-      this.service.getWeather(location).subscribe(response => {
-        let temp: any = response;
-        object.temperature = temp.main.temp;
+
+  setPollutionRange(pollution: number) {
+    this.pollutionRange = pollution;
+    console.log(this.pollutionRange);
+    let array: any = [];
+    if (!this.combinedFilteredArray) {
+      array = this.pollution;
+    } else {
+      array = this.combinedFilteredArray;
+    }
+    console.log(array);
+
+    if (this.pollutionRange == 33) {
+      let filteredArray = array.filter(object => {
+        return object.pollution_index <= 33;
       });
-    });
-    console.log(this.combinedFilteredArray);
-    if (this.weatherRange == 45) {
-      let filteredArray = this.combinedFilteredArray.filter(object => {
-        return object.temperature <= 45;
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else if (this.pollutionRange == 50) {
+      let filteredArray = array.filter(cpi => {
+        return cpi.cpi_index > 25 && cpi.cpi_index <= 50;
+      });
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else if (this.pollutionRange == 75) {
+      let filteredArray = array.filter(cpi => {
+        return cpi.cpi_index > 50 && cpi.cpi_index <= 75;
+      });
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else if (this.pollutionRange == 100) {
+      let filteredArray = array.filter(cpi => {
+        return cpi.cpi_index > 75 && cpi.cpi_index <= 100;
+      });
+      console.log(filteredArray);
+      this.combinedFilteredArray = filteredArray;
+      this.setMarkers(this.combinedFilteredArray);
+    } else {
+      let filteredArray = array.filter(cpi => {
+        return cpi.cpi_index > 100 && cpi.cpi_index <= 130;
       });
       console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
@@ -140,13 +175,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getWeather(city: string) {
-    this.route.queryParams.subscribe(queryParams => {
-      this.service.getWeather(queryParams.city).subscribe(data => {
-        this.data = data;
-      });
-    });
-  }
   setMarkers(array: any[]) {
     this.markers = [];
     array.forEach(object => {
@@ -166,8 +194,4 @@ export class HomeComponent implements OnInit {
         });
     });
   }
-
-  // toggleDisplay() {
-  //   this.showCostIndex = null;
-  // }
 }

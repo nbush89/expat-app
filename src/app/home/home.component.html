@@ -4,8 +4,8 @@
 
   <div>
     <p (click)="toggleMoneyFilter()">Money</p>
-    <p (click)="toggleWeatherFilter()">Weather</p>
-    <p (click)="togglePopulationFilter()">Population</p>
+    <!-- <p (click)="toggleWeatherFilter()">Weather</p> -->
+    <!-- <p (click)="togglePopulationFilter()">Population</p> -->
   </div>
 
   <div *ngIf="showMoneyFilter" class="money-popup">
@@ -16,15 +16,15 @@
     <p (click)="setMoneyRange(130)">$$$$$</p>
   </div>
 
-  <div *ngIf="showWeatherFilter" class="weather-popup">
-    <p (click)="setWeatherRange(45)">Cold</p>
-    <p (click)="setWeatherRange(65)">Mild</p>
-    <p (click)="setWeatherRange(85)">Hot</p>
-  </div>
-
+  <!-- <div *ngIf="showPollutionFilter" class="pollution-popup">
+    <p (click)="setPollutionRange(33)">Safe</p>
+    <p (click)="setPollutionRange(66)">Moderate</p>
+    <p (click)="setPollutionRange(99)">Unsafe</p>
+  </div> -->
+  <!-- 
   <div *ngIf="showPopulationFilter" class="population-popup">
     <p>population</p>
-  </div>
+  </div> -->
 
   <google-map [zoom]="zoom" width="90vw">
     <map-marker *ngFor="let marker of markers" [position]="marker.position">
