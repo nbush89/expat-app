@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { TravelService } from "../travel.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-home",
@@ -8,6 +9,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  allCities: any = [];
   popularCities: any = [];
   costOfLiving: any = [];
   pollution: any = [];
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
   markers: any[] = [];
   data: any;
   zoom: number = 2;
+  center: any;
   constructor(
     private service: TravelService,
     private router: Router,
@@ -48,25 +51,43 @@ export class HomeComponent implements OnInit {
           });
       }
     });
+    this.service.getCities().subscribe(response => {
+      let cities: any = response;
+      this.allCities = cities.cities;
+    });
   }
 
+  findCity(form: NgForm) {
+    let tempArray = [];
+    let foundCity = this.popularCities.find(place => {
+      return (
+        place.city_name == form.value.city &&
+        place.country == form.value.country
+      );
+    });
+    let cityLocation = this.allCities.find(place => {
+      return place.city_id == foundCity.city_id;
+    });
+    this.center = new google.maps.LatLng({
+      lat: Number(cityLocation.latitude),
+      lng: Number(cityLocation.longitude)
+    });
+    this.zoom = 12;
+    tempArray.push(foundCity);
+    this.setMarkers(tempArray);
+  }
   toggleMoneyFilter() {
     this.showMoneyFilter = !this.showMoneyFilter;
   }
-
   togglePollutionFilter() {
     this.showPollutionFilter = !this.showPollutionFilter;
   }
-
   toggleClimateFilter() {
     this.showClimateFilter = !this.showClimateFilter;
   }
-
   setMoneyRange(price: number) {
     this.moneyRange = price;
-    console.log(this.moneyRange);
   }
-
   addMoneyFilter() {
     let array: any = [];
     if (!this.combinedFilteredArray) {

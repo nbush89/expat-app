@@ -1,7 +1,27 @@
 <app-header></app-header>
 <div class="filter">
   <h2>Filter by</h2>
-
+  <form #addForm="ngForm" (ngSubmit)="findCity(addForm)">
+    <label for="city">City (State US only)</label>
+    <input
+      type="text"
+      id="city"
+      name="city"
+      placeholder="Detroit, MI"
+      required
+      ngModel
+    />
+    <label for="country">Country</label>
+    <input
+      type="text"
+      id="country"
+      name="country"
+      placeholder="United States"
+      required
+      ngModel
+    />
+    <button>Search</button>
+  </form>
   <div>
     <p (click)="toggleMoneyFilter()">Money</p>
     <p (click)="togglePollutionFilter()">Pollution</p>
@@ -31,12 +51,8 @@
     <p (click)="setClimateRange(100)">Hot</p>
     <button (click)="addClimateFilter()">Submit</button>
   </div>
-  <!-- 
-  <div *ngIf="showPopulationFilter" class="population-popup">
-    <p>population</p>
-  </div> -->
 
-  <google-map [zoom]="zoom" width="90vw">
+  <google-map [zoom]="zoom" [center]="center" width="90vw">
     <map-marker *ngFor="let marker of markers" [position]="marker.position">
     </map-marker>
   </google-map>
