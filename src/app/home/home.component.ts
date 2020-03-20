@@ -240,4 +240,16 @@ export class HomeComponent implements OnInit {
     });
     this.zoom = 2;
   }
+
+  toggleMoneyButton() {
+    this.showMoneyFilter = !this.showMoneyFilter;
+  }
+
+  togglePollutionButton() {
+    this.showPollutionFilter = !this.showPollutionFilter;
+  }
+
+  toggleClimateButton() {
+    this.showClimateFilter = !this.showClimateFilter;
+  }
 }

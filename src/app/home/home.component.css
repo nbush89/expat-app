@@ -1,32 +1,25 @@
-.cost-living{
-    display: flex;
-    
+.cost-living {
+  display: flex;
 }
 
-.box1 {
-  height: 50px;
-  width: 50px;
-  background-color: lightblue;
-  font-size: small;
+p {
+  margin: 10px;
+  height: 30px;
+  width: 30px;
 }
 
-.box2 {
-  height: 50px;
-  width: 50px;
+.popup {
+  position: fixed;
+  width: 50vw;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: lightblue;
-  font-size: small;
-}
-
-.box3 {
-  height: 50px;
-  width: 50px;
-  background-color: lightblue;
-  font-size: small;
-}
-
-.box4 {
-  height: 50px;
-  width: 50px;
-  background-color: lightblue;
-  font-size: small;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  border: 2px solid lavender;
+  border-radius: 30px;
+  justify-content: space-between;
 }

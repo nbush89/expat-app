@@ -29,28 +29,33 @@
     <p (click)="toggleClimateFilter()">Climate</p>
   </div>
 
-  <div *ngIf="showMoneyFilter" class="money-popup">
+  <div *ngIf="showMoneyFilter" class="popup">
+    <i class="fas fa-times" (click)="toggleMoneyButton()"></i>
     <p (click)="setMoneyRange(25)">$</p>
     <p (click)="setMoneyRange(50)">$$</p>
     <p (click)="setMoneyRange(75)">$$$</p>
     <p (click)="setMoneyRange(100)">$$$$</p>
     <p (click)="setMoneyRange(130)">$$$$$</p>
-    <button (click)="addMoneyFilter()">Submit</button>
+    <button (click)="toggleMoneyButton(); addMoneyFilter()">Submit</button>
   </div>
 
-  <div *ngIf="showPollutionFilter" class="pollution-popup">
+  <div *ngIf="showPollutionFilter" class="popup">
+    <i class="fas fa-times" (click)="togglePollutionButton()"></i>
     <p (click)="setPollutionRange(33)">Safe</p>
     <p (click)="setPollutionRange(66)">Moderate</p>
     <p (click)="setPollutionRange(99)">Unsafe</p>
-    <button (click)="addPollutionFilter()">Submit</button>
+    <button (click)="togglePollutionButton(); addPollutionFilter()">
+      Submit
+    </button>
   </div>
 
-  <div *ngIf="showClimateFilter" class="climate-popup">
+  <div *ngIf="showClimateFilter" class="popup">
+    <i class="fas fa-times" (click)="toggleClimateButton()"></i>
     <p (click)="setClimateRange(25)">Cold</p>
     <p (click)="setClimateRange(50)">Mild</p>
     <p (click)="setClimateRange(75)">Moderate</p>
     <p (click)="setClimateRange(100)">Hot</p>
-    <button (click)="addClimateFilter()">Submit</button>
+    <button (click)="toggleClimateButton(); addClimateFilter()">Submit</button>
   </div>
 
   <google-map [zoom]="zoom" [center]="center" width="90vw">
