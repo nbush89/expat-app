@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { TravelService } from "../travel.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import { MapInfoWindow, MapMarker, GoogleMap } from "@angular/google-maps";
 
 @Component({
   selector: "app-home",
@@ -9,6 +10,9 @@ import { NgForm } from "@angular/forms";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+  infoContent: any;
   allCities: any = [];
   popularCities: any = [];
   costOfLiving: any = [];
@@ -25,6 +29,7 @@ export class HomeComponent implements OnInit {
   data: any;
   zoom: number = 2;
   center: any;
+
   constructor(
     private service: TravelService,
     private router: Router,
@@ -33,6 +38,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getPopularCities().subscribe(response => {
+      console.log(response);
       this.popularCities = response;
       for (let i = 0; i < 10; i++) {
         this.service
@@ -47,6 +53,10 @@ export class HomeComponent implements OnInit {
               lat: Number(location.results[0].geometry.location.lat),
               lng: Number(location.results[0].geometry.location.lng)
             });
+            marker.info = {
+              city: this.popularCities[i].city_name,
+              country: this.popularCities[i].country
+            };
             this.markers.push(marker);
           });
       }
@@ -55,6 +65,17 @@ export class HomeComponent implements OnInit {
       let cities: any = response;
       this.allCities = cities.cities;
     });
+  }
+  openInfo(marker: MapMarker, content) {
+    this.infoWindow.open(marker);
+    this.infoContent = content;
+  }
+  dblClick(marker: MapMarker, content, position) {
+    this.infoWindow.open(marker);
+    this.infoContent = content;
+    this.zoom = 12;
+    console.log(position);
+    this.center = position;
   }
 
   findCity(form: NgForm) {
@@ -95,49 +116,40 @@ export class HomeComponent implements OnInit {
     } else {
       array = this.combinedFilteredArray;
     }
-    console.log(array);
-
     if (this.moneyRange == 25) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 0 && cpi.cpi_index <= 25;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 50) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 25 && cpi.cpi_index <= 50;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 75) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 50 && cpi.cpi_index <= 75;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.moneyRange == 100) {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 75 && cpi.cpi_index <= 100;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(cpi => {
         return cpi.cpi_index > 100 && cpi.cpi_index <= 130;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     }
   }
-
   setPollutionRange(pollution: number) {
     this.pollutionRange = pollution;
-    // console.log(this.pollutionRange);
   }
   addPollutionFilter() {
     let array: any = [];
@@ -151,28 +163,24 @@ export class HomeComponent implements OnInit {
       let filteredArray = array.filter(object => {
         return object.pollution_index <= 33;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.pollutionRange == 66) {
       let filteredArray = array.filter(object => {
         return object.pollution_index > 33 && object.pollution_index <= 66;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(object => {
         return object.pollution_index > 66;
       });
-      // console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     }
   }
   setClimateRange(climate: number) {
     this.climateRange = climate;
-    // console.log(this.pollutionRange);
   }
   addClimateFilter() {
     let array: any = [];
@@ -186,33 +194,28 @@ export class HomeComponent implements OnInit {
       let filteredArray = array.filter(object => {
         return object.climate_index <= 25;
       });
-      console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.climateRange == 50) {
       let filteredArray = array.filter(object => {
         return object.climate_index > 25 && object.climate_index <= 50;
       });
-      console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else if (this.climateRange == 75) {
       let filteredArray = array.filter(object => {
         return object.climate_index > 50 && object.climate_index <= 75;
       });
-      console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(object => {
         return object.climate_index > 75;
       });
-      console.log(filteredArray);
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     }
   }
-
   setMarkers(array: any[]) {
     this.markers = [];
     array.forEach(object => {
@@ -228,8 +231,13 @@ export class HomeComponent implements OnInit {
             lat: Number(location.results[0].geometry.location.lat),
             lng: Number(location.results[0].geometry.location.lng)
           });
+          marker.info = {
+            city: object.city_name,
+            country: object.country
+          };
           this.markers.push(marker);
         });
     });
+    this.zoom = 2;
   }
 }
