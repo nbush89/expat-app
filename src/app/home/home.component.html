@@ -5,8 +5,17 @@
     <label for="city">City (State US only)</label>
     <input type="text" id="city" name="city" placeholder="Detroit, MI" required ngModel />
     <label for="country">Country</label>
-    <input type="text" id="country" name="country" placeholder="United States" required ngModel />
-    <button>Search</button>
+
+    <input
+      type="text"
+      id="country"
+      name="country"
+      placeholder="United States"
+      required
+      ngModel
+    />
+    <button>Submit</button>
+
   </form>
   <div>
     <p (click)="toggleMoneyFilter()">Money</p>
