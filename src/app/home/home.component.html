@@ -1,9 +1,16 @@
 <app-header></app-header>
 <div class="filter">
-  <h2>Filter by </h2>
+  <h2>Filter by</h2>
   <form #addForm="ngForm" (ngSubmit)="findCity(addForm)">
     <label for="city">City (State US only)</label>
-    <input type="text" id="city" name="city" placeholder="Detroit, MI" required ngModel />
+    <input
+      type="text"
+      id="city"
+      name="city"
+      placeholder="Detroit, MI"
+      required
+      ngModel
+    />
     <label for="country">Country</label>
 
     <input
@@ -15,7 +22,6 @@
       ngModel
     />
     <button>Submit</button>
-
   </form>
   <div>
     <p (click)="toggleMoneyFilter()">Money</p>
@@ -48,8 +54,20 @@
   </div>
 
   <google-map [zoom]="zoom" [center]="center" width="90vw">
-    <map-marker *ngFor="let marker of markers" [position]="marker.position">
+    <map-marker
+      #markerElem
+      *ngFor="let marker of markers"
+      [position]="marker.position"
+      [label]="marker.label"
+      [title]="marker.title"
+      [options]="marker.options"
+      (mapClick)="openInfo(markerElem, marker.info)"
+      (mapDblclick)="dblClick(markerElem, marker.info, marker.position)"
+    >
     </map-marker>
+    <map-info-window>
+      <h3>{{ infoContent?.city }}, {{ infoContent?.country }}</h3>
+    </map-info-window>
   </google-map>
   <div *ngFor="let city of popularCities; index as i">
     <div *ngIf="i < 10">
