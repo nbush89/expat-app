@@ -54,9 +54,7 @@ export class HomeComponent implements OnInit {
               lat: Number(location.results[0].geometry.location.lat),
               lng: Number(location.results[0].geometry.location.lng)
             });
-            // marker.label = {
-            //   color: "http://google.com/mapfiles/ms/micons/green-dot.png"
-            // };
+            this.setMarkerColor(this.popularCities[i], marker);
             marker.info = {
               city: this.popularCities[i].city_name,
               country: this.popularCities[i].country,
@@ -82,7 +80,6 @@ export class HomeComponent implements OnInit {
     this.infoWindow.open(marker);
     this.infoContent = content;
     this.zoom = 12;
-    console.log(position);
     this.center = position;
   }
 
@@ -160,7 +157,6 @@ export class HomeComponent implements OnInit {
     } else {
       array = this.combinedFilteredArray;
     }
-    console.log(array);
     if (this.pollutionRange == 33) {
       let filteredArray = array.filter(object => {
         return object.pollution_index <= 33;
@@ -191,28 +187,21 @@ export class HomeComponent implements OnInit {
     } else {
       array = this.combinedFilteredArray;
     }
-    console.log(array);
-    if (this.climateRange == 25) {
+    if (this.climateRange == 33) {
       let filteredArray = array.filter(object => {
-        return object.climate_index <= 25;
+        return object.climate_index <= 33;
       });
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
-    } else if (this.climateRange == 50) {
+    } else if (this.climateRange == 66) {
       let filteredArray = array.filter(object => {
-        return object.climate_index > 25 && object.climate_index <= 50;
-      });
-      this.combinedFilteredArray = filteredArray;
-      this.setMarkers(this.combinedFilteredArray);
-    } else if (this.climateRange == 75) {
-      let filteredArray = array.filter(object => {
-        return object.climate_index > 50 && object.climate_index <= 75;
+        return object.climate_index > 33 && object.climate_index <= 66;
       });
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(object => {
-        return object.climate_index > 75;
+        return object.climate_index > 66;
       });
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
@@ -220,7 +209,7 @@ export class HomeComponent implements OnInit {
   }
   setMarkers(array: any[]) {
     this.markers = [];
-    array.forEach(function(object, index) {
+    array.forEach((object, index) => {
       this.service
         .getLatLon({
           city: object.city_name,
@@ -233,15 +222,7 @@ export class HomeComponent implements OnInit {
             lat: Number(location.results[0].geometry.location.lat),
             lng: Number(location.results[0].geometry.location.lng)
           });
-          // if (
-          //   object.quality_of_life_index >= 0 &&
-          //   object.quality_of_life_index <= 90
-          // )
-          //  {
-          // marker.label = {
-          //   color: "green"
-          // };
-          // }
+          this.setMarkerColor(object, marker);
           marker.info = {
             city: object.city_name,
             country: object.country,
@@ -269,5 +250,25 @@ export class HomeComponent implements OnInit {
 
   toggleClimateButton() {
     this.showClimateFilter = !this.showClimateFilter;
+  }
+  setMarkerColor(object: any, marker: any) {
+    if (
+      object.quality_of_life_index >= 0 &&
+      object.quality_of_life_index <= 100
+    ) {
+      marker.icon = "http://maps.google.com/mapfiles/ms/micons/red-dot.png";
+    } else if (
+      object.quality_of_life_index > 100 &&
+      object.quality_of_life_index <= 140
+    ) {
+      marker.icon = "http://maps.google.com/mapfiles/ms/micons/orange-dot.png";
+    } else if (
+      object.quality_of_life_index > 140 &&
+      object.quality_of_life_index <= 180
+    ) {
+      marker.icon = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";
+    } else {
+      marker.icon = "http://maps.google.com/mapfiles/ms/micons/green-dot.png";
+    }
   }
 }
