@@ -12,6 +12,7 @@ import { MapInfoWindow, MapMarker, GoogleMap } from "@angular/google-maps";
 export class HomeComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow;
+  cityInfo: any = {};
   infoContent: any;
   allCities: any = [];
   popularCities: any = [];
@@ -53,9 +54,16 @@ export class HomeComponent implements OnInit {
               lat: Number(location.results[0].geometry.location.lat),
               lng: Number(location.results[0].geometry.location.lng)
             });
+            // marker.label = {
+            //   color: "http://google.com/mapfiles/ms/micons/green-dot.png"
+            // };
             marker.info = {
               city: this.popularCities[i].city_name,
-              country: this.popularCities[i].country
+              country: this.popularCities[i].country,
+              rank: i + 1,
+              qol: Number.parseFloat(
+                this.popularCities[i].quality_of_life_index
+              ).toFixed(2)
             };
             this.markers.push(marker);
           });
@@ -134,15 +142,9 @@ export class HomeComponent implements OnInit {
       });
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
-    } else if (this.moneyRange == 100) {
-      let filteredArray = array.filter(cpi => {
-        return cpi.cpi_index > 75 && cpi.cpi_index <= 100;
-      });
-      this.combinedFilteredArray = filteredArray;
-      this.setMarkers(this.combinedFilteredArray);
     } else {
       let filteredArray = array.filter(cpi => {
-        return cpi.cpi_index > 100 && cpi.cpi_index <= 130;
+        return cpi.cpi_index > 75 && cpi.cpi_index <= 130;
       });
       this.combinedFilteredArray = filteredArray;
       this.setMarkers(this.combinedFilteredArray);
@@ -218,7 +220,7 @@ export class HomeComponent implements OnInit {
   }
   setMarkers(array: any[]) {
     this.markers = [];
-    array.forEach(object => {
+    array.forEach(function(object, index) {
       this.service
         .getLatLon({
           city: object.city_name,
@@ -231,14 +233,30 @@ export class HomeComponent implements OnInit {
             lat: Number(location.results[0].geometry.location.lat),
             lng: Number(location.results[0].geometry.location.lng)
           });
+          // if (
+          //   object.quality_of_life_index >= 0 &&
+          //   object.quality_of_life_index <= 90
+          // )
+          //  {
+          // marker.label = {
+          //   color: "green"
+          // };
+          // }
           marker.info = {
             city: object.city_name,
-            country: object.country
+            country: object.country,
+            rank: index + 1,
+            qol: Number.parseFloat(object.quality_of_life_index).toFixed(2)
           };
           this.markers.push(marker);
         });
     });
     this.zoom = 2;
+  }
+
+  moreInfo(city: any) {
+    this.cityInfo = city;
+    this.router.navigate(["city-info"]);
   }
 
   toggleMoneyButton() {

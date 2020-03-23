@@ -3,24 +3,10 @@
   <h2>Filter by</h2>
   <form #addForm="ngForm" (ngSubmit)="findCity(addForm)">
     <label for="city">City (State US only)</label>
-    <input
-      type="text"
-      id="city"
-      name="city"
-      placeholder="Detroit, MI"
-      required
-      ngModel
-    />
+    <input type="text" id="city" name="city" placeholder="Detroit, MI" required ngModel />
     <label for="country">Country</label>
 
-    <input
-      type="text"
-      id="country"
-      name="country"
-      placeholder="United States"
-      required
-      ngModel
-    />
+    <input type="text" id="country" name="country" placeholder="United States" required ngModel />
     <button>Submit</button>
   </form>
   <div>
@@ -35,7 +21,6 @@
     <p (click)="setMoneyRange(50)">$$</p>
     <p (click)="setMoneyRange(75)">$$$</p>
     <p (click)="setMoneyRange(100)">$$$$</p>
-    <p (click)="setMoneyRange(130)">$$$$$</p>
     <button (click)="toggleMoneyButton(); addMoneyFilter()">Submit</button>
   </div>
 
@@ -59,19 +44,15 @@
   </div>
 
   <google-map [zoom]="zoom" [center]="center" width="90vw">
-    <map-marker
-      #markerElem
-      *ngFor="let marker of markers"
-      [position]="marker.position"
-      [label]="marker.label"
-      [title]="marker.title"
-      [options]="marker.options"
-      (mapClick)="openInfo(markerElem, marker.info)"
-      (mapDblclick)="dblClick(markerElem, marker.info, marker.position)"
-    >
+    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+      [title]="marker.title" [options]="marker.options" (mapClick)="openInfo(markerElem, marker.info)"
+      (mapDblclick)="dblClick(markerElem, marker.info, marker.position)">
     </map-marker>
-    <map-info-window>
+    <map-info-window *ngFor="let city of popularCities">
       <h3>{{ infoContent?.city }}, {{ infoContent?.country }}</h3>
+      <h4>Ranked #{{infoContent?.rank}}</h4>
+      <h5>Quality of Life Index: {{infoContent?.qol}}</h5>
+      <a (click)="moreInfo(city)">More Info</a>
     </map-info-window>
   </google-map>
   <div *ngFor="let city of popularCities; index as i">
