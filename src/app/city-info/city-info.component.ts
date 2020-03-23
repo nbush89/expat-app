@@ -11,7 +11,8 @@ export class CityInfoComponent implements OnInit {
   constructor(private service: TravelService) {}
 
   ngOnInit(): void {
-    this.service.getPopularCities().subscribe(response => {
+    this.service.getCityInfo().subscribe(response => {
+      console.log(response);
       this.cityInfo = response;
     });
   }
