@@ -7,9 +7,21 @@ import { HttpClient } from "@angular/common/http";
 export class TravelService {
   apiKey: string = "pijdd4yhi5g4cz";
   API_KEY: string = "21fd5ac3710ae23f3172c9ff88d289bd";
+  favorites: any[] = [];
+  favPlacesList: any[] = [];
+  cityInfo: any[] = [];
 
   constructor(private http: HttpClient) {}
   getPopularCities() {
+    return this.http.get(
+      "https://www.numbeo.com/api/rankings_by_city_current?section=12",
+      {
+        params: { api_key: this.apiKey }
+      }
+    );
+  }
+
+  getCityInfo() {
     return this.http.get(
       "https://www.numbeo.com/api/rankings_by_city_current?section=12",
       {
@@ -22,9 +34,23 @@ export class TravelService {
       params: { api_key: this.apiKey }
     });
   }
-  // getWeather(){
 
-  // }
+  getFavorites() {
+    return this.favorites;
+  }
+
+  setFavoritePlaces(favorites: any[]) {
+    this.favorites = favorites;
+  }
+
+  setFavIds(ids: any[]) {
+    this.favPlacesList = ids;
+  }
+
+  getFavIds() {
+    return this.favPlacesList;
+  }
+
   getCostOfLiving() {
     return this.http.get(
       "https://www.numbeo.com/api/rankings_by_city_current?section=1",
