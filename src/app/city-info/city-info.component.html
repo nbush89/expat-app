@@ -1,1 +1,69 @@
 <app-header></app-header>
+<div class="content">
+  <div class="city">
+    <h1>{{ currentCity.city_name }}, {{ currentCity.country }}</h1>
+    <h2>Ranked #{{ cityRank }} in the World</h2>
+    <h3>More information on {{ currentCity.city_name }}:</h3>
+  </div>
+  <div class="city-info">
+    <div class="qol">
+      <div class="header">
+        <h4>Quality of Life Index:</h4>
+      </div>
+      <div class="text">
+        <p>
+          Estimation of overall quality of life in
+          {{ currentCity.city_name }}based on pollution, cost of living,
+          traffic, healthcare, safety, climate and purchasing power.
+        </p>
+        <p>{{ currentCity.quality_of_life_index | number: "3.2-2" }}</p>
+        <p>*Global rank based on quality of life index</p>
+      </div>
+    </div>
+    <div class="cost">
+      <h4>Cost of Living Index:</h4>
+      <p>{{ currentCity.cpi_index | number: "2.2-2" }}</p>
+    </div>
+    <div class="traffic">
+      <div class="header">
+        <img src="../../assets/car.png" alt="car" />
+        <h4>Average Commute Time:</h4>
+      </div>
+      <p>{{ currentCity.traffic_time_index | number: "2.2-2" }}</p>
+    </div>
+    <div class="safety">
+      <div class="header">
+        <img src="../../assets/safety.png" alt="safety" />
+        <h4>Safety Index:</h4>
+      </div>
+      <p>{{ currentCity.safety_index | number: "2.2-2" }}</p>
+    </div>
+    <div class="healthcare">
+      <div class="header">
+        <img src="../../assets/health.png" alt="healthcare" />
+        <h4>Healthcare Index:</h4>
+      </div>
+      <p>{{ currentCity.safety_index | number: "2.2-2" }}</p>
+    </div>
+    <div class="pollution">
+      <div class="header">
+        <img src="../../assets/moderate.png" alt="pollution" />
+        <h4>Pollution</h4>
+      </div>
+      <div class="text">
+        <p>
+          Estimation of overall air pollution in {{ currentCity.city_name }}
+        </p>
+        <p>{{ currentCity.pollution_index | number: "2.2-2" }}/100</p>
+        <p>*Based on survey data</p>
+      </div>
+    </div>
+    <div class="climate">
+      <div class="header">
+        <img src="../../assets/weather.png" alt="climate" />
+        <h4>Climate Index:</h4>
+      </div>
+      <p>{{ currentCity.climate_index | number: "2.2-2" }}</p>
+    </div>
+  </div>
+</div>

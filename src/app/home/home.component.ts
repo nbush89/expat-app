@@ -41,31 +41,11 @@ export class HomeComponent implements OnInit {
     this.service.getPopularCities().subscribe(response => {
       console.log(response);
       this.popularCities = response;
+      let topTen: any = [];
       for (let i = 0; i < 10; i++) {
-        this.service
-          .getLatLon({
-            city: this.popularCities[i].city_name,
-            country: this.popularCities[i].country
-          })
-          .subscribe(response => {
-            let location: any = response;
-            let marker: any = {};
-            marker.position = new google.maps.LatLng({
-              lat: Number(location.results[0].geometry.location.lat),
-              lng: Number(location.results[0].geometry.location.lng)
-            });
-            this.setMarkerColor(this.popularCities[i], marker);
-            marker.info = {
-              city: this.popularCities[i].city_name,
-              country: this.popularCities[i].country,
-              rank: i + 1,
-              qol: Number.parseFloat(
-                this.popularCities[i].quality_of_life_index
-              ).toFixed(2)
-            };
-            this.markers.push(marker);
-          });
+        topTen.push(this.popularCities[i]);
       }
+      this.setMarkers(topTen);
     });
     this.service.getCities().subscribe(response => {
       let cities: any = response;
@@ -82,7 +62,6 @@ export class HomeComponent implements OnInit {
     this.zoom = 12;
     this.center = position;
   }
-
   findCity(form: NgForm) {
     let tempArray = [];
     let foundCity = this.popularCities.find(place => {
@@ -223,10 +202,13 @@ export class HomeComponent implements OnInit {
             lng: Number(location.results[0].geometry.location.lng)
           });
           this.setMarkerColor(object, marker);
+          let cityRank = this.popularCities.findIndex(city => {
+            return object.city_id == city.city_id;
+          });
           marker.info = {
             city: object.city_name,
             country: object.country,
-            rank: index + 1,
+            rank: cityRank + 1,
             qol: Number.parseFloat(object.quality_of_life_index).toFixed(2),
             city_id: object.city_id
           };
@@ -235,22 +217,20 @@ export class HomeComponent implements OnInit {
     });
     this.zoom = 2;
   }
-
   moreInfo() {
-    let city = this.combinedFilteredArray.find(city => {
+    let city = this.popularCities.find(city => {
       return city.city_id == this.infoContent.city_id;
     });
     this.service.setCurrentCity(city);
+    console.log(city);
     this.router.navigate(["city-info"]);
   }
   toggleMoneyButton() {
     this.showMoneyFilter = !this.showMoneyFilter;
   }
-
   togglePollutionButton() {
     this.showPollutionFilter = !this.showPollutionFilter;
   }
-
   toggleClimateButton() {
     this.showClimateFilter = !this.showClimateFilter;
   }
