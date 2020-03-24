@@ -1,5 +1,5 @@
 <app-header></app-header>
-<h2>Search City</h2>
+<h3>Search City</h3>
 <div class="text-filter">
   <form #addForm="ngForm" (ngSubmit)="findCity(addForm)">
     <label for="city">City (State US only)</label>
@@ -23,17 +23,44 @@
     <button>Submit</button>
   </form>
 </div>
-<h2>Filter by:</h2>
+<h3>Filter by:</h3>
 <div>
   <div class="img-filter">
-    <img
-      src="../../assets/cost-of-living.jpg"
-      alt="cost-of-living"
-      (click)="toggleMoneyFilter()"
-    />
-    <p (click)="togglePollutionFilter()">Pollution</p>
-    <p (click)="toggleClimateFilter()">Climate</p>
+    <div class="overlay-cost">
+      <img
+        class="image"
+        src="../../assets/moneyHouse.png"
+        alt="cost-of-living"
+      />
+
+      <div class="overlay">
+        <div class="text"  (click)="toggleMoneyFilter()">Cost of Living</div>
+      </div>
+    </div>
+
+    <div class="overlay-cost">
+      <img
+        src="../../assets/pollutionHouse.png"
+        alt="pollution"
+        (click)="togglePollutionFilter()"
+      />
+      <div class="overlay">
+        <div class="text" (click)="togglePollutionFilter()">Pollution</div>
+      </div>
+    </div>
+
+    <div class="overlay-cost">
+      <img
+        src="../../assets/climate.jpg"
+        alt="climate"
+        (click)="toggleClimateFilter()"
+      />
+      <div class="overlay">
+        <div class="text" (click)="toggleClimateFilter()">Climate</div>
+      </div>
+    </div>
   </div>
+
   <div
     class="popup-container"
     *ngIf="showClimateFilter || showMoneyFilter || showPollutionFilter"
@@ -45,46 +72,73 @@
         alt="moneypic"
         (click)="setMoneyRange(25)"
       />
-      <p (click)="setMoneyRange(50)">
-        <img src="../../assets/two.png" alt="moneypic" />
-        Mid-Range
-      </p>
-      <p (click)="setMoneyRange(75)">
-        <img src="../../assets/three.png" alt="moneypic" />
-        Expensive
-      </p>
-      <p (click)="setMoneyRange(100)">
-        <img src="../../assets/four.png" alt="moneypic" />
-        Luxury
-      </p>
+
+      <img
+        src="../../assets/two.png"
+        alt="moneypic"
+        (click)="setMoneyRange(50)"
+      />
+
+      <img
+        src="../../assets/three.png"
+        alt="moneypic"
+        (click)="setMoneyRange(75)"
+      />
+
+      <img
+        src="../../assets/four.png"
+        alt="moneypic"
+        (click)="setMoneyRange(100)"
+      />
+
       <button (click)="toggleMoneyButton(); addMoneyFilter()">Submit</button>
     </div>
     <div *ngIf="showPollutionFilter" class="popup">
       <i class="fas fa-times" (click)="togglePollutionButton()"></i>
-      <p (click)="setPollutionRange(33)">
-        <img src="../../assets/safe.png" alt="safe" /> Safe
-      </p>
-      <p (click)="setPollutionRange(66)">
-        <img src="../../assets/moderate.png" alt="" /> Moderate
-      </p>
-      <p (click)="setPollutionRange(99)">
-        <img src="../../assets/unsafe.png" alt="" /> Unsafe
-      </p>
+
+      <img
+        src="../../assets/safe.png"
+        alt="safe"
+        (click)="setPollutionRange(33)"
+      />
+
+      <img
+        src="../../assets/moderate.png"
+        alt="moderate"
+        (click)="setPollutionRange(66)"
+      />
+
+      <img
+        src="../../assets/unsafe.png"
+        alt="unsafe"
+        (click)="setPollutionRange(99)"
+      />
+
       <button (click)="togglePollutionButton(); addPollutionFilter()">
         Submit
       </button>
     </div>
     <div *ngIf="showClimateFilter" class="popup">
       <i class="fas fa-times" (click)="toggleClimateButton()"></i>
-      <p (click)="setClimateRange(33)">
-        <img src="../../assets/cold.png" alt="cold" /> Cold
-      </p>
-      <p (click)="setClimateRange(66)">
-        <img src="../../assets/mild.png" alt="mild" /> Mild
-      </p>
-      <p (click)="setClimateRange(100)">
-        <img src="../../assets/hot.png" alt="hot" /> Hot
-      </p>
+
+      <img
+        src="../../assets/cold.png"
+        alt="cold"
+        (click)="setClimateRange(33)"
+      />
+
+      <img
+        src="../../assets/mild.png"
+        alt="mild"
+        (click)="setClimateRange(66)"
+      />
+
+      <img
+        src="../../assets/hot.png"
+        alt="hot"
+        (click)="setClimateRange(100)"
+      />
+
       <button (click)="toggleClimateButton(); addClimateFilter()">
         Submit
       </button>
@@ -92,7 +146,7 @@
   </div>
 </div>
 <div class="map">
-  <google-map [zoom]="zoom" [center]="center" width="80vw">
+  <google-map [zoom]="zoom" [center]="center" width="100vw">
     <map-marker
       #markerElem
       *ngFor="let marker of markers"
@@ -112,10 +166,4 @@
     </map-info-window>
   </google-map>
 </div>
-<div *ngFor="let city of popularCities; index as i">
-  <div *ngIf="i < 10">
-    <p>{{ city.country }}</p>
-    <button><i class="far fa-star"></i></button>
-    <p>{{ city.city_name }}</p>
-  </div>
-</div>
+
