@@ -7,13 +7,11 @@ import { TravelService } from "../travel.service";
   styleUrls: ["./city-info.component.css"]
 })
 export class CityInfoComponent implements OnInit {
-  cityInfo: any = [];
+  currentCity: any;
   constructor(private service: TravelService) {}
 
   ngOnInit(): void {
-    this.service.getCityInfo().subscribe(response => {
-      console.log(response);
-      this.cityInfo = response;
-    });
+    this.currentCity = this.service.getCurrentCity();
+    console.log(this.currentCity);
   }
 }

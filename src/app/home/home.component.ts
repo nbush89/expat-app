@@ -98,9 +98,9 @@ export class HomeComponent implements OnInit {
       lat: Number(cityLocation.latitude),
       lng: Number(cityLocation.longitude)
     });
-    this.zoom = 12;
     tempArray.push(foundCity);
     this.setMarkers(tempArray);
+    this.zoom = 12;
   }
   toggleMoneyFilter() {
     this.showMoneyFilter = !this.showMoneyFilter;
@@ -227,7 +227,8 @@ export class HomeComponent implements OnInit {
             city: object.city_name,
             country: object.country,
             rank: index + 1,
-            qol: Number.parseFloat(object.quality_of_life_index).toFixed(2)
+            qol: Number.parseFloat(object.quality_of_life_index).toFixed(2),
+            city_id: object.city_id
           };
           this.markers.push(marker);
         });
@@ -235,11 +236,13 @@ export class HomeComponent implements OnInit {
     this.zoom = 2;
   }
 
-  moreInfo(city: any) {
-    this.cityInfo = city;
+  moreInfo() {
+    let city = this.combinedFilteredArray.find(city => {
+      return city.city_id == this.infoContent.city_id;
+    });
+    this.service.setCurrentCity(city);
     this.router.navigate(["city-info"]);
   }
-
   toggleMoneyButton() {
     this.showMoneyFilter = !this.showMoneyFilter;
   }
@@ -254,16 +257,16 @@ export class HomeComponent implements OnInit {
   setMarkerColor(object: any, marker: any) {
     if (
       object.quality_of_life_index >= 0 &&
-      object.quality_of_life_index <= 100
+      object.quality_of_life_index <= 60
     ) {
       marker.icon = "http://maps.google.com/mapfiles/ms/micons/red-dot.png";
     } else if (
-      object.quality_of_life_index > 100 &&
-      object.quality_of_life_index <= 140
+      object.quality_of_life_index > 60 &&
+      object.quality_of_life_index <= 120
     ) {
       marker.icon = "http://maps.google.com/mapfiles/ms/micons/orange-dot.png";
     } else if (
-      object.quality_of_life_index > 140 &&
+      object.quality_of_life_index > 120 &&
       object.quality_of_life_index <= 180
     ) {
       marker.icon = "http://maps.google.com/mapfiles/ms/micons/yellow-dot.png";

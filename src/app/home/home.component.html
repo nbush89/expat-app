@@ -104,11 +104,11 @@
       (mapDblclick)="dblClick(markerElem, marker.info, marker.position)"
     >
     </map-marker>
-    <map-info-window *ngFor="let city of popularCities">
+    <map-info-window>
       <h3>{{ infoContent?.city }}, {{ infoContent?.country }}</h3>
       <h4>Ranked #{{ infoContent?.rank }}</h4>
       <h5>Quality of Life Index: {{ infoContent?.qol }}</h5>
-      <a (click)="moreInfo(city)">More Info</a>
+      <a (click)="moreInfo()">More Info</a>
     </map-info-window>
   </google-map>
 </div>
