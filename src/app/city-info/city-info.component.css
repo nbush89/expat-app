@@ -39,7 +39,6 @@ img {
   height: 160px;
   width: 200px;
   border: 2px solid #008cba;
-  /* box-shadow: 5px 5px 5px 5px #888888; */
   border-radius: 5px;
   margin: 20px;
   padding: 10px;
@@ -50,6 +49,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .text {
@@ -79,7 +79,7 @@ img {
   width: 100%;
   opacity: 0;
   transition: 0.1s ease;
-  background-color: #008cba;
+  background-color: #2e9cc0;
 }
 .text-overlay {
   color: white;
@@ -87,8 +87,6 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
-  /* -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%); */
   transform: translate(-50%, -50%);
   text-align: center;
 }

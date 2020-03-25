@@ -10,7 +10,6 @@ header {
 img {
   height: 100px;
   width: 150px;
-  margin: 10px;
 }
 
 ul {
@@ -22,8 +21,6 @@ li {
   margin-right: 20px;
   font-size: 22px;
 }
-
-
 
 a {
   text-decoration: none;

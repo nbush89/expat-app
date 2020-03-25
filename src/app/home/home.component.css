@@ -1,7 +1,7 @@
 main {
   background-image: url("../../assets/asia.jpg");
   background-size: cover;
-  padding-bottom: 30px;
+  padding: 30px 0px;
 }
 h3 {
   text-align: center;
@@ -76,10 +76,9 @@ google-map {
   border-radius: 10px;
 }
 
-.moreInfoBtn{
+.moreInfoBtn {
   text-decoration: underline;
   margin-left: 40%;
-  
 }
 
 .popup-container {
@@ -150,7 +149,7 @@ img:active {
   transform: translateY(4px);
   border-color: lightgrey;
 }
-.info-window{
+.info-window {
   background-color: #027373;
   color: white;
   border: 1.5px solid #f2b999;
