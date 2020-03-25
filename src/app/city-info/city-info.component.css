@@ -36,7 +36,7 @@ img {
   background-color: #e6ffcc;
   align-items: center;
   justify-content: center;
-  height: 160px;
+  height: 180px;
   width: 200px;
   border: 2px solid #008cba;
   border-radius: 5px;
@@ -60,6 +60,7 @@ img {
   text-align: center;
   margin-top: 10px;
 }
+
 .above-100,
 .below-100 {
   display: flex;
@@ -69,6 +70,7 @@ img {
   text-align: center;
   margin-top: 10px;
 }
+
 .overlay-box {
   position: absolute;
   top: 0;
@@ -79,8 +81,11 @@ img {
   width: 100%;
   opacity: 0;
   transition: 0.1s ease;
-  background-color: #2e9cc0;
+  background-color: #008cba;
+  display: flex;
+  align-items: center;
 }
+
 .text-overlay {
   color: white;
   font-size: 16px;
@@ -90,27 +95,35 @@ img {
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
 .qol:hover .overlay-box {
   opacity: 1;
 }
+
 .cost:hover .overlay-box {
   opacity: 1;
 }
+
 .traffic:hover .overlay-box {
   opacity: 1;
 }
+
 .safety:hover .overlay-box {
   opacity: 1;
 }
+
 .healthcare:hover .overlay-box {
   opacity: 1;
 }
+
 .climate:hover .overlay-box {
   opacity: 1;
 }
+
 .pollution:hover .overlay-box {
   opacity: 1;
 }
+
 .disclaimer {
   color: whitesmoke;
 }
