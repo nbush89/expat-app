@@ -4,12 +4,13 @@ header {
   align-items: center;
   margin: 0;
   width: 100vw;
-  background-color: #027373;
+  background-color: #0a7b83;
 }
 
 img {
   height: 100px;
   width: 150px;
+  margin: 10px;
 }
 
 ul {

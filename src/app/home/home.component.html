@@ -1,92 +1,170 @@
 <app-header></app-header>
-<h3>Search City</h3>
-<div class="text-filter">
-  <form #addForm="ngForm" (ngSubmit)="findCity(addForm)">
-    <label for="city">City (State US only)</label>
-    <input type="text" id="city" name="city" placeholder="Detroit, MI" required ngModel />
-    <label for="country">Country</label>
-    <input type="text" id="country" name="country" placeholder="United States" required ngModel />
-    <button>Submit</button>
-  </form>
-</div>
-<h3>Filter by:</h3>
-<div>
-  <div class="img-filter">
-    <div class="overlay-cost">
-      <img class="image" src="../../assets/moneyHouse.png" alt="cost-of-living" />
+<main>
+  <h3>Search City</h3>
+  <div class="text-filter">
+    <form #addForm="ngForm" (ngSubmit)="findCity(addForm)">
+      <label for="city">City (State US only)</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        placeholder="Detroit, MI"
+        required
+        ngModel
+      />
+      <label for="country">Country</label>
+      <input
+        type="text"
+        id="country"
+        name="country"
+        placeholder="United States"
+        required
+        ngModel
+      />
+      <button>Submit</button>
+    </form>
+  </div>
+  <h3>Filter by:</h3>
+  <div>
+    <div class="img-filter">
+      <div class="overlay-cost">
+        <img
+          class="image"
+          src="../../assets/moneyHouse.png"
+          alt="cost-of-living"
+        />
 
-      <div class="overlay">
-        <div class="text" (click)="toggleMoneyFilter()">Cost of Living</div>
+        <div class="overlay">
+          <div class="text" (click)="toggleMoneyFilter()">Cost of Living</div>
+        </div>
+      </div>
+
+      <div class="overlay-cost">
+        <img
+          src="../../assets/pollutionHouse.png"
+          alt="pollution"
+          (click)="togglePollutionFilter()"
+        />
+        <div class="overlay">
+          <div class="text" (click)="togglePollutionFilter()">Pollution</div>
+        </div>
+      </div>
+
+      <div class="overlay-cost">
+        <img
+          src="../../assets/climate.jpg"
+          alt="climate"
+          (click)="toggleClimateFilter()"
+        />
+        <div class="overlay">
+          <div class="text" (click)="toggleClimateFilter()">Climate</div>
+        </div>
       </div>
     </div>
 
-    <div class="overlay-cost">
-      <img src="../../assets/pollutionHouse.png" alt="pollution" (click)="togglePollutionFilter()" />
-      <div class="overlay">
-        <div class="text" (click)="togglePollutionFilter()">Pollution</div>
-      </div>
-    </div>
+    <div
+      class="popup-container"
+      *ngIf="showClimateFilter || showMoneyFilter || showPollutionFilter"
+    >
+      <div *ngIf="showMoneyFilter" class="popup">
+        <i class="fas fa-times" (click)="toggleMoneyButton()"></i>
+        <img
+          src="../../assets/single.png"
+          alt="moneypic"
+          (click)="setMoneyRange(25)"
+        />
 
-    <div class="overlay-cost">
-      <img src="../../assets/climate.jpg" alt="climate" (click)="toggleClimateFilter()" />
-      <div class="overlay">
-        <div class="text" (click)="toggleClimateFilter()">Climate</div>
+        <img
+          src="../../assets/two.png"
+          alt="moneypic"
+          (click)="setMoneyRange(50)"
+        />
+
+        <img
+          src="../../assets/three.png"
+          alt="moneypic"
+          (click)="setMoneyRange(75)"
+        />
+
+        <img
+          src="../../assets/four.png"
+          alt="moneypic"
+          (click)="setMoneyRange(100)"
+        />
+
+        <button (click)="toggleMoneyButton(); addMoneyFilter()">Submit</button>
+      </div>
+      <div *ngIf="showPollutionFilter" class="popup">
+        <i class="fas fa-times" (click)="togglePollutionButton()"></i>
+
+        <img
+          src="../../assets/safe.png"
+          alt="safe"
+          (click)="setPollutionRange(33)"
+        />
+
+        <img
+          src="../../assets/moderate.png"
+          alt="moderate"
+          (click)="setPollutionRange(66)"
+        />
+
+        <img
+          src="../../assets/unsafe.png"
+          alt="unsafe"
+          (click)="setPollutionRange(99)"
+        />
+
+        <button (click)="togglePollutionButton(); addPollutionFilter()">
+          Submit
+        </button>
+      </div>
+      <div *ngIf="showClimateFilter" class="popup">
+        <i class="fas fa-times" (click)="toggleClimateButton()"></i>
+
+        <img
+          src="../../assets/cold.png"
+          alt="cold"
+          (click)="setClimateRange(33)"
+        />
+
+        <img
+          src="../../assets/mild.png"
+          alt="mild"
+          (click)="setClimateRange(66)"
+        />
+
+        <img
+          src="../../assets/hot.png"
+          alt="hot"
+          (click)="setClimateRange(100)"
+        />
+
+        <button (click)="toggleClimateButton(); addClimateFilter()">
+          Submit
+        </button>
       </div>
     </div>
   </div>
-
-  <div class="popup-container" *ngIf="showClimateFilter || showMoneyFilter || showPollutionFilter">
-    <div *ngIf="showMoneyFilter" class="popup">
-      <i class="fas fa-times" (click)="toggleMoneyButton()"></i>
-      <img src="../../assets/single.png" alt="moneypic" (click)="setMoneyRange(25)" />
-
-      <img src="../../assets/two.png" alt="moneypic" (click)="setMoneyRange(50)" />
-
-      <img src="../../assets/three.png" alt="moneypic" (click)="setMoneyRange(75)" />
-
-      <img src="../../assets/four.png" alt="moneypic" (click)="setMoneyRange(100)" />
-
-      <button (click)="toggleMoneyButton(); addMoneyFilter()">Submit</button>
-    </div>
-    <div *ngIf="showPollutionFilter" class="popup">
-      <i class="fas fa-times" (click)="togglePollutionButton()"></i>
-
-      <img src="../../assets/safe.png" alt="safe" (click)="setPollutionRange(33)" />
-
-      <img src="../../assets/moderate.png" alt="moderate" (click)="setPollutionRange(66)" />
-
-      <img src="../../assets/unsafe.png" alt="unsafe" (click)="setPollutionRange(99)" />
-
-      <button (click)="togglePollutionButton(); addPollutionFilter()">
-        Submit
-      </button>
-    </div>
-    <div *ngIf="showClimateFilter" class="popup">
-      <i class="fas fa-times" (click)="toggleClimateButton()"></i>
-
-      <img src="../../assets/cold.png" alt="cold" (click)="setClimateRange(33)" />
-
-      <img src="../../assets/mild.png" alt="mild" (click)="setClimateRange(66)" />
-
-      <img src="../../assets/hot.png" alt="hot" (click)="setClimateRange(100)" />
-
-      <button (click)="toggleClimateButton(); addClimateFilter()">
-        Submit
-      </button>
-    </div>
+  <div class="map">
+    <google-map [zoom]="zoom" [center]="center" width="85vw">
+      <map-marker
+        #markerElem
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+        [options]="{ icon: marker.icon }"
+        (mapClick)="openInfo(markerElem, marker.info)"
+        (mapDblclick)="dblClick(markerElem, marker.info, marker.position)"
+      >
+      </map-marker>
+      <map-info-window>
+        <h3>{{ infoContent?.city }}, {{ infoContent?.country }}</h3>
+        <h4>Ranked #{{ infoContent?.rank }}</h4>
+        <h5>Quality of Life Index: {{ infoContent?.qol }}</h5>
+        <a (click)="moreInfo()">More Info</a>
+      </map-info-window>
+    </google-map>
   </div>
-</div>
-<div class="map">
-  <google-map [zoom]="zoom" [center]="center" width="100vw">
-    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
-      [title]="marker.title" [options]="{ icon: marker.icon }" (mapClick)="openInfo(markerElem, marker.info)"
-      (mapDblclick)="dblClick(markerElem, marker.info, marker.position)">
-    </map-marker>
-    <map-info-window>
-      <h3>{{ infoContent?.city }}, {{ infoContent?.country }}</h3>
-      <h4>Ranked #{{ infoContent?.rank }}</h4>
-      <h5>Quality of Life Index: {{ infoContent?.qol }}</h5>
-      <a (click)="moreInfo()">More Info</a>
-    </map-info-window>
-  </google-map>
-</div>
+</main>

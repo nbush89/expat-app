@@ -1,5 +1,8 @@
 .content {
-  margin: 40px;
+  margin: 0px;
+  padding: 10px;
+  background-image: url("../../assets/asia.jpg");
+  background-size: cover;
 }
 
 .city {
@@ -30,15 +33,17 @@ img {
 .traffic {
   display: flex;
   flex-direction: column;
+  background-color: #e6ffcc;
   align-items: center;
   justify-content: center;
-  height: 200px;
-  width: 230px;
+  height: 160px;
+  width: 200px;
   border: 2px solid #008cba;
-  box-shadow: 5px 5px 5px 5px #888888;
+  /* box-shadow: 5px 5px 5px 5px #888888; */
   border-radius: 5px;
   margin: 20px;
   padding: 10px;
+  position: relative;
 }
 
 .header {
@@ -54,4 +59,60 @@ img {
   align-items: space-between;
   text-align: center;
   margin-top: 10px;
+}
+.above-100,
+.below-100 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  text-align: center;
+  margin-top: 10px;
+}
+.overlay-box {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.1s ease;
+  background-color: #008cba;
+}
+.text-overlay {
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); */
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.qol:hover .overlay-box {
+  opacity: 1;
+}
+.cost:hover .overlay-box {
+  opacity: 1;
+}
+.traffic:hover .overlay-box {
+  opacity: 1;
+}
+.safety:hover .overlay-box {
+  opacity: 1;
+}
+.healthcare:hover .overlay-box {
+  opacity: 1;
+}
+.climate:hover .overlay-box {
+  opacity: 1;
+}
+.pollution:hover .overlay-box {
+  opacity: 1;
+}
+.disclaimer {
+  color: whitesmoke;
 }

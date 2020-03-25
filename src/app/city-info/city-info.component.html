@@ -7,63 +7,129 @@
   </div>
   <div class="city-info">
     <div class="qol">
+      <div class="overlay-box">
+        <p class="text-overlay">
+          Estimation of overall quality of life in
+          {{ currentCity.city_name }} based on pollution, cost of living,
+          traffic, healthcare, safety, climate and purchasing power indices.
+        </p>
+      </div>
       <div class="header">
-        <h4>Quality of Life Index:</h4>
+        <h4>Quality of Life:</h4>
       </div>
       <div class="text">
-        <p>
-          Estimation of overall quality of life in
-          {{ currentCity.city_name }}based on pollution, cost of living,
-          traffic, healthcare, safety, climate and purchasing power.
-        </p>
         <p>{{ currentCity.quality_of_life_index | number: "3.2-2" }}</p>
-        <p>*Global rank based on quality of life index</p>
       </div>
     </div>
     <div class="cost">
-      <h4>Cost of Living Index:</h4>
-      <p>{{ currentCity.cpi_index | number: "2.2-2" }}</p>
+      <div class="overlay-box">
+        <div class="below-100" *ngIf="currentCity.cpi_index < 100">
+          <p class="text-overlay">
+            Cost of Living index is based on grocery cost, rent, purchasing
+            power, and restaurant prices. Index is rated as a percentage more or
+            less expensive than NYC.
+          </p>
+          <p class="text-overlay">
+            {{ 100 - currentCity.cpi_index | number: "2.2-2" }}% less expensive
+            than New York City.
+          </p>
+        </div>
+        <div class="above-100" *ngIf="currentCity.cpi_index > 100">
+          <p class="text-overlay">
+            Cost of Living index is based on grocery cost, rent, purchasing
+            power, and restaurant prices. Index is rated as a percentage more or
+            less expensive than NYC.
+          </p>
+          <p class="text-overlay">
+            {{ currentCity.cpi_index - 100 | number: "2.2-2" }}% more expensive
+            than New York City.
+          </p>
+        </div>
+      </div>
+      <div class="header">
+        <img src="../../assets/moneyHouse.png" alt="money-house" />
+        <h4>Cost of Living:</h4>
+      </div>
+      <div class="text">
+        <p>{{ currentCity.cpi_index | number: "2.2-2" }}</p>
+      </div>
     </div>
     <div class="traffic">
+      <div class="overlay-box">
+        <p class="text-overlay">
+          This is the average time reported for a one-way commute.
+        </p>
+      </div>
       <div class="header">
         <img src="../../assets/car.png" alt="car" />
         <h4>Average Commute Time:</h4>
       </div>
-      <p>{{ currentCity.traffic_time_index | number: "2.2-2" }}</p>
+      <div class="text">
+        <p>{{ currentCity.traffic_time_index | number: "2.2-2" }} minutes</p>
+      </div>
     </div>
     <div class="safety">
+      <div class="overlay-box">
+        <p class="text-overlay">
+          This is the reported perception of safety in
+          {{ currentCity.city_name }} (Higher index is considered safer).
+        </p>
+      </div>
       <div class="header">
         <img src="../../assets/safety.png" alt="safety" />
         <h4>Safety Index:</h4>
       </div>
-      <p>{{ currentCity.safety_index | number: "2.2-2" }}</p>
+      <div class="text">
+        <p>{{ currentCity.safety_index | number: "2.2-2" }}/100</p>
+      </div>
     </div>
     <div class="healthcare">
+      <div class="overlay-box">
+        <p class="text-overlay">
+          This is an estimation of the overall quality of the healthcare system
+          (Higher index is considered better quality).
+        </p>
+      </div>
       <div class="header">
         <img src="../../assets/health.png" alt="healthcare" />
         <h4>Healthcare Index:</h4>
       </div>
-      <p>{{ currentCity.safety_index | number: "2.2-2" }}</p>
+      <div class="text">
+        <p>{{ currentCity.safety_index | number: "2.2-2" }}/100</p>
+      </div>
     </div>
     <div class="pollution">
+      <div class="overlay-box">
+        <p class="text-overlay">
+          This is an estimation of the overall air pollution (The lower the
+          number the better the air quality).
+        </p>
+      </div>
       <div class="header">
         <img src="../../assets/moderate.png" alt="pollution" />
-        <h4>Pollution</h4>
+        <h4>Pollution Index:</h4>
       </div>
       <div class="text">
-        <p>
-          Estimation of overall air pollution in {{ currentCity.city_name }}
-        </p>
         <p>{{ currentCity.pollution_index | number: "2.2-2" }}/100</p>
-        <p>*Based on survey data</p>
       </div>
     </div>
     <div class="climate">
+      <div class="overlay-box">
+        <p class="text-overlay">
+          This is an estimation of climate likeability. The closer to 100, the
+          more moderate the temperature and the lower the humidity.
+        </p>
+      </div>
       <div class="header">
         <img src="../../assets/weather.png" alt="climate" />
         <h4>Climate Index:</h4>
       </div>
-      <p>{{ currentCity.climate_index | number: "2.2-2" }}</p>
+      <div class="text">
+        <p>{{ currentCity.climate_index | number: "2.2-2" }}/100</p>
+      </div>
     </div>
   </div>
+  <p class="disclaimer">
+    *All information is reported based on survey data (credit Numbeo).
+  </p>
 </div>
