@@ -9,16 +9,18 @@ p {
 }
 
 input {
-  border: 2px solid #b56de8;
+  border: 2px solid #027373;
   border-radius: 15px;
 }
 
 ::placeholder {
-  padding: 5px;
+  padding: 10px;
+  font-size: small;
 }
 
 label {
   padding: 5px;
+  color: black;
 }
 
 .text-filter {
@@ -27,9 +29,18 @@ label {
 }
 
 button {
-  border: 2px solid #b56de8;
+  border: 2px solid #027373;
   border-radius: 15px;
   margin: 5px;
+  font-size: small;
+}
+
+.popup-btn {
+  position: relative;
+  top: 45%;
+  left: -45%;
+  border: 2px solid #f2b999;
+  font-size: small;
 }
 
 .img-filter {
@@ -41,10 +52,13 @@ button {
 img {
   width: 70px;
   height: 70px;
-  border: 3px solid black;
+  border: 2px solid #f2b999;
   border-radius: 15px;
   margin: 15px;
   background-color: white;
+}
+.image {
+  border: 2px solid #027373;
 }
 
 google-map {
@@ -53,8 +67,14 @@ google-map {
 }
 
 .map {
-  border: 4px solid #008cba;
+  border: 3px solid #027373;
   border-radius: 10px;
+}
+
+.moreInfoBtn{
+  text-decoration: underline;
+  margin-left: 40%;
+  
 }
 
 .popup-container {
@@ -64,7 +84,7 @@ google-map {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(10, 133, 115, 0.3);
   top: 0;
   left: 0;
   z-index: 3;
@@ -78,7 +98,7 @@ google-map {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(124, 0, 131, 0.2);
+  background-color: rgba(10, 133, 115, 0.3);
   top: 0;
   left: 0;
   z-index: 3;
@@ -97,7 +117,7 @@ google-map {
   width: 100%;
   opacity: 0;
   transition: 0.5s ease;
-  background-color: #008cba;
+  background-color: #027373;
 }
 
 .overlay-cost {
@@ -120,13 +140,13 @@ google-map {
   text-align: center;
 }
 
-.image {
-  display: block;
-}
-
 img:active {
   box-shadow: 0 5px white;
   transform: translateY(4px);
   border-color: lightgrey;
 }
-
+.info-window{
+  background-color: #027373;
+  color: white;
+  border: 1.5px solid #f2b999;
+}
