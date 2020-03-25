@@ -4,7 +4,7 @@ header {
   align-items: center;
   margin: 0;
   width: 100vw;
-  background-color: #B56DE8;
+  background-color: #027373;
 }
 
 img {
@@ -14,14 +14,12 @@ img {
 
 ul {
   display: flex;
-
 }
 
 li {
   list-style: none;
   margin-right: 20px;
   font-size: 22px;
-
 }
 
 a {
