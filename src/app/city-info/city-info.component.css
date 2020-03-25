@@ -1,21 +1,26 @@
 .content {
   margin: 40px;
 }
+
 .city {
   text-align: center;
 }
+
 .city-info {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
+
 h4 {
   margin-left: 5px;
 }
+
 img {
   width: 40px;
   height: 40px;
 }
+
 .qol,
 .cost,
 .safety,
@@ -29,17 +34,19 @@ img {
   justify-content: center;
   height: 200px;
   width: 230px;
-  border: 2px solid purple;
+  border: 2px solid #008cba;
   box-shadow: 5px 5px 5px 5px #888888;
   border-radius: 5px;
   margin: 20px;
   padding: 10px;
 }
+
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .text {
   display: flex;
   flex-direction: column;
