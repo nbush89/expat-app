@@ -27,7 +27,6 @@
         </form>
       </div>
       <h3>Filter by:</h3>
-
       <div class="img-filter">
         <div class="overlay-filter">
           <img
@@ -36,12 +35,10 @@
             src="../../assets/moneyHouse.png"
             alt="cost-of-living"
           />
-
           <div class="overlay">
             <div class="text" (click)="toggleMoneyFilter()">Cost of Living</div>
           </div>
         </div>
-
         <div class="overlay-filter">
           <img
             class="image"
@@ -53,7 +50,6 @@
             <div class="text" (click)="togglePollutionFilter()">Pollution</div>
           </div>
         </div>
-
         <div class="overlay-filter">
           <img
             class="image"
@@ -77,19 +73,16 @@
             alt="moneypic"
             (click)="setMoneyRange(25)"
           />
-
           <img
             src="../../assets/two.png"
             alt="moneypic"
             (click)="setMoneyRange(50)"
           />
-
           <img
             src="../../assets/three.png"
             alt="moneypic"
             (click)="setMoneyRange(75)"
           />
-
           <img
             src="../../assets/four.png"
             alt="moneypic"
@@ -103,19 +96,16 @@
         </div>
         <div *ngIf="showPollutionFilter" class="popup">
           <i class="fas fa-times" (click)="togglePollutionButton()"></i>
-
           <img
             src="../../assets/safe.png"
             alt="safe"
             (click)="setPollutionRange(33)"
           />
-
           <img
             src="../../assets/moderate.png"
             alt="moderate"
             (click)="setPollutionRange(66)"
           />
-
           <img
             src="../../assets/unsafe.png"
             alt="unsafe"
@@ -129,24 +119,23 @@
         </div>
         <div *ngIf="showClimateFilter" class="popup" id="test">
           <i class="fas fa-times" (click)="toggleClimateButton()"></i>
-
-          <img
-            src="../../assets/cold.png"
-            alt="cold"
-            (click)="setClimateRange(33)"
-          />
-
-          <img
-            src="../../assets/mild.png"
-            alt="mild"
-            (click)="setClimateRange(66)"
-          />
-
-          <img
-            src="../../assets/hot.png"
-            alt="hot"
-            (click)="setClimateRange(100)"
-          />
+          <div class="filter-imgs">
+            <img
+              src="../../assets/cold.png"
+              alt="cold"
+              (click)="setClimateRange(33)"
+            />
+            <img
+              src="../../assets/mild.png"
+              alt="mild"
+              (click)="setClimateRange(66)"
+            />
+            <img
+              src="../../assets/hot.png"
+              alt="hot"
+              (click)="setClimateRange(100)"
+            />
+          </div>
           <div class="popup-btn">
             <button (click)="toggleClimateButton(); addClimateFilter()">
               Submit
@@ -155,7 +144,6 @@
         </div>
       </div>
     </div>
-
     <div class="map">
       <div class="key">
         <div class="keyholder">
