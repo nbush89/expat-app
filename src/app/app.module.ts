@@ -11,6 +11,8 @@ import { HomeComponent } from "./home/home.component";
 import { CityInfoComponent } from "./city-info/city-info.component";
 import { FavoriteCitiesComponent } from "./favorite-cities/favorite-cities.component";
 import { GoogleMapsModule } from "@angular/google-maps";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { GoogleMapsModule } from "@angular/google-maps";
     AppRoutingModule,
     HttpClientModule,
     GoogleMapsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]

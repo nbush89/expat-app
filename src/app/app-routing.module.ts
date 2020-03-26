@@ -7,10 +7,10 @@ import { FavoriteCitiesComponent } from "./favorite-cities/favorite-cities.compo
 
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
-  { path: "home", component: HomeComponent },
+  { path: "home", component: HomeComponent, data: {animation:"Home"} },
   { path: "favorite-cities", component: FavoriteCitiesComponent },
   { path: "search", component: SearchComponent },
-  { path: "city-info", component: CityInfoComponent },
+  { path: "city-info", component: CityInfoComponent, data:{animation:"City-Info"} },
   { path: "**", component: HomeComponent }
 ];
 

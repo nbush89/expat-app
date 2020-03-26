@@ -14,6 +14,7 @@ p {
 input {
   border: 2px solid #027373;
   border-radius: 15px;
+  width: 100%;
 }
 
 ::placeholder {
@@ -24,11 +25,16 @@ input {
 label {
   padding: 5px;
   color: black;
+  display: block;
+  align-items: center;
 }
+
+
 
 .text-filter {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 button {
@@ -36,20 +42,28 @@ button {
   border-radius: 15px;
   margin: 5px;
   font-size: small;
+  bottom: 0;
 }
 
 .popup-btn {
-  position: relative;
-  top: 45%;
-  left: -45%;
   border: 2px solid #f2b999;
   font-size: small;
+  position: absolute;
+  bottom: 0;
 }
 
+.fas {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  padding: 3px;
+}
 .img-filter {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  position: relative;
 }
 
 img {
@@ -70,17 +84,18 @@ google-map {
 }
 
 .map {
-  /* border: 4px solid #008cba; */
   border-radius: 10px;
 }
 
 .moreInfoBtn {
   text-decoration: underline;
-  margin-left: 40%;
+  margin-left: 35%;
+ 
 }
 
 .popup-container {
   position: fixed;
+
   width: 100vw;
   height: 100%;
   display: flex;
@@ -94,19 +109,20 @@ google-map {
 }
 
 .popup {
-  display: flex;
   width: 50vw;
   height: 50%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  position: relative;
   background-color: rgba(10, 133, 115, 0.3);
   top: 0;
   left: 0;
   z-index: 3;
   border: 2px solid lavender;
   border-radius: 30px;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .overlay {
@@ -119,14 +135,14 @@ google-map {
   width: 100%;
   opacity: 0;
   transition: 0.5s ease;
-  background-color: #027373;
+  background-color: #023e58;
 }
 
-.overlay-cost {
+.overlay-filter {
   position: relative;
 }
 
-.overlay-cost:hover .overlay {
+.overlay-filter:hover .overlay {
   opacity: 1;
 }
 
@@ -148,7 +164,7 @@ img:active {
   border-color: lightgrey;
 }
 .info-window {
-  background-color: #027373;
+  background-color: #023e58;
   color: white;
-  border: 1.5px solid #f2b999;
+  position: relative;
 }
