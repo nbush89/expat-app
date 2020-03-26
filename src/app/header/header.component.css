@@ -3,9 +3,9 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 0;
-  width: 100vw;
   background-color: #023e58;
 }
+
 .box {
   display: flex;
   justify-content: space-between;
@@ -15,9 +15,10 @@ header {
   box-shadow: 1px 6px 8px rgba(0, 0, 0, 0.5);
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 0 4px 8px rgba(0, 0, 0, 0.4); */
 }
+
 img {
   height: 120px;
-  width: 150px;
+  width: 135px;
 }
 
 ul {
