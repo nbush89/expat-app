@@ -11,13 +11,16 @@ p {
   height: 30px;
   width: 30px;
 }
-
-input {
-  border: 2px solid #027373;
-  border-radius: 15px;
-  width: 100%;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
+input {
+  padding: 5px;
+  border-radius: 8px;
+  border: 2px solid #023e58;
+}
 ::placeholder {
   padding: 10px;
   font-size: small;
@@ -29,17 +32,30 @@ label {
   display: block;
   align-items: center;
 }
-
-
-
 .text-filter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.submit {
+  padding: 1px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin: 15px 0px;
+  border: 2px solid #023e58;
+}
 
+.submit:hover {
+  background-color: #023e58;
+  color: whitesmoke;
+}
+button:hover {
+  background-color: #023e58;
+  color: whitesmoke;
+}
 button {
-  border: 2px solid #027373;
+  padding: 1px 25px;
+  border: 2px solid #023e58;
   border-radius: 15px;
   margin: 5px;
   font-size: small;
@@ -47,8 +63,6 @@ button {
 }
 
 .popup-btn {
-  border: 2px solid #f2b999;
-  font-size: small;
   position: absolute;
   bottom: 0;
 }
@@ -70,14 +84,14 @@ button {
 img {
   width: 70px;
   height: 70px;
-  border: 2px solid #f2b999;
+  border: 2px solid #023e58;
   border-radius: 15px;
   margin: 15px;
   background-color: white;
 }
 
 .image {
-  border: 2px solid #027373;
+  border: 2px solid #023e58;
 }
 
 .map-container {
@@ -98,12 +112,10 @@ img {
 .moreInfoBtn {
   text-decoration: underline;
   margin-left: 35%;
- 
 }
 
 .popup-container {
   position: fixed;
-
   width: 100vw;
   height: 100%;
   display: flex;
@@ -132,7 +144,6 @@ img {
   border-radius: 30px;
   justify-content: space-around;
 }
-
 .overlay {
   position: absolute;
   top: 0;
@@ -158,6 +169,7 @@ img {
   color: white;
   font-size: 20px;
   position: absolute;
+  padding: 30px;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -173,16 +185,9 @@ img:active {
 }
 
 .info-window {
-  background-color: #023e58;
-  color: white;
+  color: #023e58;
   position: relative;
 }
-
-/* .key {
-  display: flex;
-  justify-content: center;
-} */
-
 .keyholder {
   display: flex;
   justify-content: center;
@@ -199,7 +204,6 @@ img:active {
 }
 
 @media only screen and (min-width: 768px) {
-
   .container {
     display: flex;
   }
@@ -217,13 +221,6 @@ img:active {
     flex-direction: column;
     align-items: center;
   }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
   .map {
     flex: 1;
     display: flex;
@@ -232,7 +229,6 @@ img:active {
     align-items: center;
     flex-grow: 5;
   }
-
   .google {
     width: 85%;
     box-shadow: 7px 7px 19px 2px;
@@ -251,25 +247,4 @@ img:active {
     display: flex;
     flex-direction: column;
   }
-
-  input {
-    padding: 5px;
-    border-radius: 8px;
-    border: 2px solid #023e58;
-  }
-
-  .submit {
-    padding: 1px 25px;
-    font-size: 16px;
-    border-radius: 8px;
-    margin: 15px 0px;
-    border: 2px solid #023e58;
-  }
-
-  .submit:hover {
-    background-color: #023e58;
-    color: whitesmoke;
-  }
-
-
 }

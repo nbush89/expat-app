@@ -54,7 +54,7 @@ export class TravelService {
   getLatLon(location: any) {
     return this.http.get("https://maps.googleapis.com/maps/api/geocode/json", {
       params: {
-        key: "AIzaSyDj4cvTBS38pmt0A7T-ZNrenwm1rerRojI",
+        key: "AIzaSyCPdpvbrv58qez-kRJnawSMUVFGSMKFhYY",
         address: `${location.city}, ${location.country}`
       }
     });

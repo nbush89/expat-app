@@ -12,6 +12,10 @@
   justify-content: space-around;
   flex-wrap: wrap;
 }
+h1 {
+  font-style: italic;
+  margin-top: 10px;
+}
 h4 {
   margin-left: 5px;
 }
